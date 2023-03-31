@@ -1,0 +1,23 @@
+server:
+  port: 8009
+
+spring:
+  application:
+    name: ws-retail-itemservice
+  devtools:
+    livereload:
+      enabled: true
+
+  data:
+    mongodb:
+      uri: mongodb://root:rootpassword@${MONGO_HOST}:27017/reach-engine?authSource=admin
+#      username: root
+#      password: rootpassword
+#      authentication-database: admin
+      repositories:
+        type: AUTO
+
+logging:
+  level:
+    org:
+      mongodb=DEBUG:

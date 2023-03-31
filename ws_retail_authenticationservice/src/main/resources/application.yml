@@ -1,0 +1,23 @@
+server:
+  port: 8007
+
+spring:
+  cloud:
+    vault:
+      kv:
+        enabled: 'true'
+      scheme: http
+      authentication: TOKEN
+      host: vault-server
+      token: vault-plaintext-root-token
+      port: '8200'
+  config:
+    import: vault://
+  application:
+    name: ws-retail-authenticationservice
+
+#  ssl:
+#    key-alias: ws_retail
+#    key-store: classpath:ws_retail.jks
+#    key-store-type: JKS
+#    key-store-password: password
