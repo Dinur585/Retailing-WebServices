@@ -1,0 +1,22 @@
+.productTableContainer{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin: 0.5rem;
+    padding: 1rem;
+}
+
+.productTable, th, td{
+    border: 1px solid;
+    padding: 1rem;
+}
+
+th{
+    background-color: black;
+    color: white;
+}
+
+tr{
+    background-color: lightgray;
+    color: darkblue;
+}

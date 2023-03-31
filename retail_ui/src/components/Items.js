@@ -2,6 +2,7 @@ import pic from "../images/bookImg.jpg";
 import { Store } from '../Store';
 import { useContext, useState, useEffect } from 'react';
 import '../index.css';
+import '../styles/Items.css'
 import { DataTable } from 'primereact/datatable';
 import { InputSwitch } from 'primereact/inputswitch';
 import { Column } from 'primereact/column';
@@ -64,25 +65,29 @@ function Items() {
         }]
 
     return (
-        <div>
-            <h2>Item Details</h2>
-            <div>
-                <main>
-                    <>
-                   
-                        <DataTable value={products} tableStyle={{ minWidth: '50rem' }} >
-                            <Column field="product_id" header="ProductId"></Column>
-                            <Column field="product" header="Product Name"></Column>
-                            <Column field="price" header="Price"></Column>
-                            <Column field="quantity" header="Quantity"></Column>
-                            <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
-
-                        </DataTable>
-                        <button>Default</button>
-                    </>
-                </main>
-
-            </div>
+        <div className="productTableContainer">
+            <table className="productTable">
+                <thead>
+                    <tr>
+                        <th>Product Id</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {products.map((product)=>{
+                        return (<tr>
+                            <td>{product.product_id}</td>
+                            <td>{product.product}</td>
+                            <td>{product.price}</td>
+                            <td>{product.quantity}</td>
+                            <td><button className="btn btn-info">Add</button></td>
+                        </tr>)
+                    })}
+                </tbody>
+            </table>
         </div>
     );
 }
