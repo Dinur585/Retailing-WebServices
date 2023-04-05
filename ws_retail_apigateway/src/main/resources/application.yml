@@ -7,6 +7,19 @@ spring:
 
   cloud:
     gateway:
+      globalcors:
+        default-filters:
+          - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedMethods:
+              - GET
+              - POST
+            allowedHeaders:
+              - Content-Type
+
       routes:
         - id: ws-retail-itemservice
           uri: http://ws-retail-itemservice:8009

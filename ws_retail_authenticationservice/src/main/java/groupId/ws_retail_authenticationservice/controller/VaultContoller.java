@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin("*")
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/auth")
 public class VaultContoller {
