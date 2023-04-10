@@ -18,6 +18,9 @@ public class AuthService {
     private Boolean isAuthenticated = false;
 
     @Autowired
+    private JwtService jwtService;
+
+    @Autowired
     private BCryptPasswordEncoder encoder;
 
     // configure VaultTemplate bean from env properties
@@ -43,21 +46,21 @@ public class AuthService {
     }
 
     //method to check if login creds are present in vault and return a boolean if credentials are present or not
-    public Boolean loginUserService(Credentials loginUser) throws AccessDeniedException{
+    public String loginUserService(Credentials loginUser) throws AccessDeniedException{
         VaultKeyValueOperations vaultKeyValueOperations = vaultTemplate.opsForKeyValue("secret/data/ws_retail_authenticationservice",
                 VaultKeyValueOperationsSupport.KeyValueBackend.KV_2);
         VaultResponseSupport response = vaultKeyValueOperations.get(loginUser.getUsername(), Credentials.class);
-
 
         if (response==null){
             throw new AccessDeniedException("Access denied");
         }
         //cast response object to credentials model
         Credentials credentials = (Credentials) response.getData();
-        if(loginUser.getUsername().equals(credentials.getUsername()) && encoder.matches(loginUser.getPassword(), credentials.getPassword())){
+        isAuthenticated = loginUser.getUsername().equals(credentials.getUsername()) && encoder.matches(loginUser.getPassword(), credentials.getPassword());
+        System.out.println(isAuthenticated);
+        if(isAuthenticated){
 
-            isAuthenticated = true;
-            return isAuthenticated;
+            return jwtService.generateToken(loginUser.getUsername());
         }
         else {
             throw new AccessDeniedException("Access denied");

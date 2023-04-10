@@ -19,7 +19,7 @@ public class VaultContoller {
     @Autowired
     private AuthService authService;
 
-    private Boolean isAuthenticated;
+    private String isAuthenticated;
 
     //post mapping for login functionality
     @PostMapping("/login")
@@ -30,8 +30,7 @@ public class VaultContoller {
             return ResponseHandler.generateResponse("Successfully logged in", HttpStatus.OK, isAuthenticated);
         }
         catch (AccessDeniedException e){
-            isAuthenticated = false;
-            return ResponseHandler.generateResponse("Invalid Credentials", HttpStatus.UNAUTHORIZED, isAuthenticated);
+            return ResponseHandler.generateResponse("Invalid Credentials", HttpStatus.UNAUTHORIZED);
         }
     }
 
