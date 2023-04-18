@@ -3,12 +3,12 @@ import '../index.css';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import axios from "axios";
-
+import * as constant from '../Constants';
 
 function Orders() {
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost:8010/api/order/orders').then((res) => {
+        axios.get(constant.WS_ORDER_SERVICE + '/orders').then((res) => {
             setProducts(res.data);
             console.log(products);
         });

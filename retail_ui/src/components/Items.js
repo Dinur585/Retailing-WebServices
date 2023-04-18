@@ -3,14 +3,12 @@ import '../index.css';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import axios from "axios";
-
-//const mockData = require('./items.json');
-
+import * as constant from '../Constants';
 
 function Items() {
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost:8010/api/item/items').then((res) => {
+        axios.get(constant.WS_ITEM_SERVICE + '/items').then((res) => {
             // console.log(res.data);
             setProducts(res.data);
             console.log(products);
