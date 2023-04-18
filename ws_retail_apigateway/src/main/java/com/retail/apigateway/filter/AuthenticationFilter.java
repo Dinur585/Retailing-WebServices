@@ -1,11 +1,15 @@
 package com.retail.apigateway.filter;
 
+import com.retail.apigateway.exception.AccessDeniedException;
 import com.retail.apigateway.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpHeaders;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+@Component
 public class AuthenticationFilter extends AbstractGatewayFilterFactory<AuthenticationFilter.Config> {
 
     @Autowired
@@ -37,7 +41,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                     jwtUtil.validateToken(authHeader);
                 }
                 catch (Exception e){
-                    throw new RuntimeException("unauthorized access to application");
+                    throw new AccessDeniedException("Access Denied");
                 }
             }
 

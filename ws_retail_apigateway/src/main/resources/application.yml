@@ -25,6 +25,8 @@ spring:
           uri: http://ws-retail-itemservice:8009
           predicates:
             - Path=/api/item/**
+          filters:
+            - AuthenticationFilter
 
         - id: ws-retail-orderservice
           uri: http://ws-retail-orderservice:8008
