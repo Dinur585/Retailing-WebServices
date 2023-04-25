@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../styles/Auth.css";
 import { useNavigate } from "react-router-dom";
+import { Buffer } from "buffer";
+
 const Auth = () => {
   let [authMode, setAuthMode] = useState("signin");
   let navigate = useNavigate();
@@ -14,6 +16,7 @@ const Auth = () => {
   const [isAuthenticated, setAuthenticated] = useState(false);
 
   const createUser = (username, password) => {
+    password = Buffer.from(password).toString("base64");
     const user = { username, password };
     return user;
   };
@@ -22,6 +25,7 @@ const Auth = () => {
     e.preventDefault();
     const loginUrl = "http://localhost:8010/api/v1/auth/login";
     const loginUser = createUser(username, password);
+    //console.log(loginUser);
     axios
       .post(loginUrl, loginUser)
       .then((resp) => {

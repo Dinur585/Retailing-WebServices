@@ -12,6 +12,8 @@ import org.springframework.vault.core.VaultTemplate;
 import org.springframework.vault.support.VaultResponseSupport;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.util.Base64;
+
 @Service
 public class AuthService {
 
@@ -56,6 +58,8 @@ public class AuthService {
         }
         //cast response object to credentials model
         Credentials credentials = (Credentials) response.getData();
+//        byte[] decodedBytes = Base64.getDecoder().decode(credentials.);
+//        String decodedString = new String(decodedBytes);
         isAuthenticated = loginUser.getUsername().equals(credentials.getUsername()) && encoder.matches(loginUser.getPassword(), credentials.getPassword());
         System.out.println(isAuthenticated);
         if(isAuthenticated){
